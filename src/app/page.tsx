@@ -6,10 +6,14 @@ import { projects } from "@/data/projects";
 import { site } from "@/data/site";
 
 const stats = [
-  { label: "projects listed", value: "3" },
-  { label: "hackathon wins", value: "2" },
-  { label: "Google AI certs", value: "3" },
-  { label: "capstone client", value: "BJMP Region III" },
+  { label: "projects listed", value: "3", href: "/work" },
+  { label: "hackathon wins", value: "2", href: "/credentials" },
+  { label: "Google AI certs", value: "3", href: "/credentials" },
+  {
+    label: "capstone — BJMP Region III",
+    value: "1",
+    href: "/work/easecert",
+  },
 ];
 
 export default function Home() {
@@ -27,11 +31,12 @@ export default function Home() {
           {site.fullName} · {site.tagline}
         </p>
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-          {site.role}
+          I build systems around how people actually work.
         </p>
         <p className="mt-3 max-w-xl text-muted">
-          I build full-stack systems that trace back to real problems —
-          business logic first, user flow always.
+          I focus on backend architecture, business logic, and efficient user
+          flows — building across the stack to turn real problems into
+          practical systems.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
@@ -51,19 +56,22 @@ export default function Home() {
           <span className="text-ok">●</span> available for work & freelance
           <span className="mx-2">·</span>
           <span className="text-accent">recent:</span> eGovPH Hackathon — Top
-          30 Finalist (this month)
+          30 Finalist
         </div>
       </section>
 
       <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {stats.map((s) => (
-          <div
+          <Link
             key={s.label}
-            className="rounded-md border border-line bg-surface px-4 py-3"
+            href={s.href}
+            className="group rounded-md border border-line bg-surface px-4 py-3 transition-colors hover:border-accent"
           >
             <p className="font-mono text-xl text-accent">{s.value}</p>
-            <p className="mt-1 text-xs text-faint">{s.label}</p>
-          </div>
+            <p className="mt-1 text-xs text-faint transition-colors group-hover:text-accent">
+              {s.label}
+            </p>
+          </Link>
         ))}
       </section>
 
@@ -90,32 +98,35 @@ export default function Home() {
       <section className="pb-16">
         <SectionHeader
           path="/about"
-          description="Student developer with a product brain — how systems should flow, and why."
+          description="Student developer with a systems mindset — how things should work, how users move through them, and why."
         />
         <TerminalWindow title={`${site.handle}@portfolio: ~/profile`}>
           <div className="space-y-2 font-mono text-sm">
             <p>
               <span className="text-accent">$</span> cat about.txt
             </p>
-            <p className="text-muted">
-              Student developer with a product brain. I&apos;ve built for real
-              users — capstone clients and hackathon judges — and I design
-              systems around what the business actually needs.
-            </p>
-            <p className="text-muted">
-              Comfortable across frontend, backend, databases and API
-              integration, plus the product judgment that keeps a system
-              coherent.
-            </p>
+            <div className="whitespace-pre-line text-muted leading-relaxed">
+              {`I'm a BSIT student and full-stack developer who enjoys
+turning real-world problems into practical systems.
+
+I naturally gravitate toward the backend — designing
+business logic, database structures, APIs, and workflows
+that keep a system efficient and consistent.
+
+I also work across the frontend when needed, whether
+building an interface from scratch or translating an
+existing design into a functional product.
+
+I care about more than just making things work. I think
+through the entire flow, question unnecessary complexity,
+and look for solutions that make sense for both the
+business and the people using the system.`}
+            </div>
             <p className="pt-2">
               <span className="text-accent">$</span> ls ./values
             </p>
             <p className="text-muted">
-              business-first · measurable · user-flow-aware
-            </p>
-            <p className="pt-2">
-              <span className="text-accent">$</span> _
-              <span className="ml-1 inline-block h-4 w-2 translate-y-0.5 bg-accent cursor-blink" />
+              business-logic-first · backend-minded · user-flow-aware
             </p>
           </div>
         </TerminalWindow>
@@ -139,12 +150,12 @@ export default function Home() {
           it.
         </p>
         <div className="mt-6">
-          <a
-            href={`mailto:${site.email}`}
-            className="rounded bg-accent px-5 py-2.5 font-mono text-sm text-white transition-opacity hover:opacity-90"
+          <Link
+            href="/contact"
+            className="font-mono text-sm text-accent hover:underline"
           >
-            {site.email}
-          </a>
+            contact me →
+          </Link>
         </div>
       </section>
     </div>

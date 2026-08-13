@@ -3,6 +3,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { site } from "@/data/site";
+import { useTheme } from "./ThemeProvider";
+import { useSound } from "./SoundProvider";
+import { useSnake } from "./SnakeProvider";
 
 type Cmd = {
   label: string;
@@ -16,6 +19,9 @@ export default function CommandPalette({
   onClose: () => void;
 }) {
   const router = useRouter();
+  const { setMode } = useTheme();
+  const { setEnabled, play } = useSound();
+  const { open: openSnake } = useSnake();
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -26,19 +32,22 @@ export default function CommandPalette({
       hint: `cd ${href}`,
       run: () => router.push(href),
     });
+    const close = (fn: () => void): Cmd["run"] => () => {
+      onClose();
+      fn();
+    };
     return [
       nav("/"),
       nav("/work"),
+      nav("/ongoing"),
       nav("/credentials"),
       nav("/about"),
       nav("/stack"),
       nav("/contact"),
       {
         label: "email",
-        hint: "mailto",
-        run: () => {
-          window.location.href = `mailto:${site.email}`;
-        },
+        hint: "cd /contact",
+        run: () => router.push("/contact"),
       },
       {
         label: "github",
@@ -54,8 +63,38 @@ export default function CommandPalette({
           window.open(site.linkedin, "_blank", "noopener,noreferrer");
         },
       },
+      {
+        label: "play",
+        hint: "run snake",
+        run: close(() => openSnake()),
+      },
+      {
+        label: "theme dark",
+        hint: "set theme",
+        run: close(() => setMode("dark")),
+      },
+      {
+        label: "theme light",
+        hint: "set theme",
+        run: close(() => setMode("light")),
+      },
+      {
+        label: "theme system",
+        hint: "set theme",
+        run: close(() => setMode("system")),
+      },
+      {
+        label: "sound on",
+        hint: "set sound",
+        run: close(() => setEnabled(true)),
+      },
+      {
+        label: "sound off",
+        hint: "set sound",
+        run: close(() => setEnabled(false)),
+      },
     ];
-  }, [router]);
+  }, [router, setMode, setEnabled, onClose, openSnake]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -70,13 +109,14 @@ export default function CommandPalette({
   }, []);
 
   const run = (cmd: Cmd) => {
+    play("enter");
     onClose();
     cmd.run();
   };
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center bg-black/60 px-4 pt-24 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-start justify-center bg-overlay px-4 pt-24 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
@@ -116,24 +156,25 @@ export default function CommandPalette({
             esc
           </kbd>
         </div>
-        <ul className="max-h-80 overflow-auto p-2">
+        <ul className="max-h-80 overflow-y-auto overflow-x-hidden p-2">
           {filtered.length === 0 ? (
             <li className="px-3 py-4 font-mono text-sm text-faint">
               command not found: {query || " "} — try `help`
             </li>
           ) : (
             filtered.map((cmd, i) => (
-              <li key={`${cmd.label}:${i}`}>
+              <li key={`${cmd.label}:${i}`} className="min-w-0">
                 <button
                   onMouseEnter={() => setActive(i)}
                   onClick={() => run(cmd)}
-                  className={`flex w-full items-center justify-between gap-3 rounded px-3 py-2 text-left font-mono text-sm ${
+                  data-no-click-sound
+                  className={`flex w-full min-w-0 items-center justify-between gap-3 rounded px-3 py-2 text-left font-mono text-sm ${
                     i === active ? "bg-accent/15 text-text" : "text-muted"
                   }`}
                 >
-                  <span>{cmd.label}</span>
+                  <span className="min-w-0 shrink truncate">{cmd.label}</span>
                   <span
-                    className={`text-xs ${
+                    className={`shrink-0 truncate text-xs ${
                       i === active ? "text-accent" : "text-faint"
                     }`}
                   >

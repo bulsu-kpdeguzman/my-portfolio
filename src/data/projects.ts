@@ -25,39 +25,6 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "easecert",
-    name: "EaseCert",
-    category: "Capstone",
-    tagline:
-      "A web-based document issuance and appointment management system for BJMP Region III.",
-    year: "2026",
-    stack: ["React.js", "Laravel", "PHP", "MySQL"],
-    tags: ["capstone", "document issuance", "appointments"],
-    featured: true,
-    status: "shipped",
-    overview:
-      "A full-stack document issuance and appointment management system developed for BJMP Region III. EaseCert digitizes document requests, appointment scheduling, and administrative workflows, providing a centralized platform that makes the issuance process more organized and efficient.",
-    problem:
-      "Document requests and appointment processes involved multiple manual steps, making it difficult for applicants and personnel to efficiently manage requests and schedules. There was also a need for a centralized system that could organize document issuance workflows while providing better visibility for administrative personnel. EaseCert was developed to address these challenges within the context of BJMP Region III.",
-    role: "Lead Developer · Project Manager · Capstone Leader — led the development and overall execution of EaseCert as the capstone leader. Responsible for coordinating the project, translating requirements into system features, overseeing the development workflow, and serving as the primary developer building the full-stack application.",
-    approach: [
-      "Led the planning, development, and coordination of the capstone project.",
-      "Developed the user interface and application workflows using React.js.",
-      "Built RESTful backend functionality using Laravel and PHP.",
-      "Designed and implemented the MySQL database and system data relationships.",
-      "Implemented document request and appointment management workflows.",
-      "Configured and deployed the application for actual system use and testing.",
-    ],
-    results: [
-      { label: "deliverable", value: "capstone project" },
-      { label: "client context", value: "BJMP Region III" },
-      {
-        label: "coverage",
-        value: "document issuance + appointment workflows",
-      },
-    ],
-  },
-  {
     slug: "eskolar",
     name: "eSkolar",
     category: "eGov PH",
@@ -87,6 +54,39 @@ export const projects: Project[] = [
       {
         label: "deliverable",
         value: "functional hackathon prototype",
+      },
+    ],
+  },
+  {
+    slug: "easecert",
+    name: "EaseCert",
+    category: "Capstone",
+    tagline:
+      "A web-based document issuance and appointment management system for BJMP Region III.",
+    year: "2026",
+    stack: ["React.js", "Laravel", "PHP", "MySQL"],
+    tags: ["capstone", "document issuance", "appointments"],
+    featured: true,
+    status: "shipped",
+    overview:
+      "A full-stack document issuance and appointment management system developed for BJMP Region III. EaseCert digitizes document requests, appointment scheduling, and administrative workflows, providing a centralized platform that makes the issuance process more organized and efficient.",
+    problem:
+      "Document requests and appointment processes involved multiple manual steps, making it difficult for applicants and personnel to efficiently manage requests and schedules. There was also a need for a centralized system that could organize document issuance workflows while providing better visibility for administrative personnel. EaseCert was developed to address these challenges within the context of BJMP Region III.",
+    role: "Lead Developer · Project Manager · Capstone Leader — led the development and overall execution of EaseCert as the capstone leader. Responsible for coordinating the project, translating requirements into system features, overseeing the development workflow, and serving as the primary developer building the full-stack application.",
+    approach: [
+      "Led the planning, development, and coordination of the capstone project.",
+      "Developed the user interface and application workflows using React.js.",
+      "Built RESTful backend functionality using Laravel and PHP.",
+      "Designed and implemented the MySQL database and system data relationships.",
+      "Implemented document request and appointment management workflows.",
+      "Configured and deployed the application for actual system use and testing.",
+    ],
+    results: [
+      { label: "deliverable", value: "capstone project" },
+      { label: "client context", value: "BJMP Region III" },
+      {
+        label: "coverage",
+        value: "document issuance + appointment workflows",
       },
     ],
   },

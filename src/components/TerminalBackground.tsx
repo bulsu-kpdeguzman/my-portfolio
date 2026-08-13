@@ -61,9 +61,9 @@ export default function TerminalBackground() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-0 select-none overflow-hidden opacity-[0.06] sm:opacity-[0.08] md:opacity-[0.14]"
+      className="pointer-events-none fixed inset-0 z-0 select-none overflow-hidden opacity-[0.12] sm:opacity-[0.15] md:opacity-[0.22] light:opacity-[0.14] sm:light:opacity-[0.16] md:light:opacity-[0.22]"
     >
-      <div className="absolute left-3 top-16 flex max-h-[70vh] max-w-[min(70vw,360px)] flex-col overflow-hidden lg:left-60">
+      <div className="absolute left-3 top-16 flex max-h-[70vh] max-w-[min(70vw,360px)] flex-col overflow-hidden lg:left-68">
         {state.lines.map((l, i) => {
           const isActive = i === state.lines.length - 1;
           return (

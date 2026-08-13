@@ -6,10 +6,13 @@ export const metadata: Metadata = {
 };
 
 const stack = [
-  { group: "languages", items: ["JavaScript", "TypeScript", "PHP", "SQL"] },
-  { group: "frontend", items: ["React.js", "Tailwind CSS"] },
-  { group: "backend", items: ["Laravel", "REST APIs"] },
-  { group: "data", items: ["MySQL"] },
+  {
+    group: "languages",
+    items: ["Java", "JavaScript", "TypeScript", "SQL", "PHP", "C#"],
+  },
+  { group: "frontend", items: ["React.js", "Next.js", "Tailwind CSS"] },
+  { group: "backend", items: ["Laravel", "REST APIs", "Docker"] },
+  { group: "data", items: ["MySQL", "PostgreSQL"] },
   {
     group: "gov integrations",
     items: ["eGovSSO", "eMessage", "eGovAI", "Face Liveness"],

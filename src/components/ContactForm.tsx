@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { site } from "@/data/site";
+import { useSound } from "./SoundProvider";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -10,6 +11,7 @@ export default function ContactForm() {
   const [message, setMessage] = useState("");
   const [website, setWebsite] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  const { play } = useSound();
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,6 +25,7 @@ export default function ContactForm() {
       const data = (await res.json()) as { error?: string };
       if (!res.ok) throw new Error(data.error ?? "Send failed.");
       setStatus("success");
+      play("success");
       setName("");
       setMessage("");
     } catch {

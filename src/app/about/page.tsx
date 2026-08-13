@@ -8,21 +8,38 @@ export const metadata: Metadata = {
 };
 
 const skills = [
-  "React.js",
   "Laravel",
   "PHP",
   "MySQL",
-  "JavaScript / TypeScript",
-  "Tailwind CSS",
+  "PostgreSQL",
   "REST APIs",
+  "React.js",
+  "Next.js",
+  "JavaScript / TypeScript",
+  "Java",
+  "C#",
+  "Tailwind CSS",
+  "Docker",
   "Git / GitHub",
 ];
 
 const values = [
-  "Business outcome first — I ask 'what should this move for the business' before touching code.",
-  "Measure everything — I try to attach real numbers to every project.",
-  "Simple by construction — prefer boring, reliable systems that are easy to reason about.",
-  "UX flow matters to me — I build the whole stack, but I review the product like a user.",
+  {
+    title: "Business-first",
+    text: "Understand the problem before building the solution.",
+  },
+  {
+    title: "Systems-minded",
+    text: "Design the logic, structure, and flow before adding complexity.",
+  },
+  {
+    title: "User-flow-aware",
+    text: "Build the whole stack, but evaluate the product from the user's perspective.",
+  },
+  {
+    title: "Practical by design",
+    text: "Prefer simple, reliable solutions over unnecessary complexity.",
+  },
 ];
 
 const timeline = [
@@ -62,23 +79,33 @@ export default function AboutPage() {
 
       <TerminalWindow title={`${site.handle}@portfolio: ~/about`}>
         <div className="space-y-4 text-muted leading-relaxed">
-          <p>
-            <span className="text-accent">$</span> I&apos;m{" "}
-            <span className="text-text">Kenjie</span> — a student developer
-            who treats software like a business decision, not just a ticket.
-            My capstone for BJMP Region III digitized document issuance and
-            appointments; my hackathon build integrated eGovSSO, eMessage,
-            eGovAI and Face Liveness into one scholarship platform.
+          <p className="font-mono text-xs text-faint">
+            <span className="text-accent">$</span> cat about.txt
           </p>
           <p>
-            The slightly unusual part: I also judge UX and product flow well —
-            I&apos;m the one asking &quot;wait, the user will never figure
-            that out from here.&quot; That&apos;s the mindset I bring to every
-            project.
+            I&apos;m <span className="text-text">Kenjie</span> — a BSIT
+            student and full-stack developer who treats software as a system,
+            not just a collection of features.
           </p>
           <p>
-            Not a professional designer — that&apos;s why this site looks like
-            a terminal. Judgment over decoration.
+            I naturally gravitate toward the backend: business logic, database
+            design, APIs, and workflows. I like figuring out how things
+            should work before figuring out how to code them.
+          </p>
+          <p>
+            I&apos;m comfortable across the stack, but my strongest
+            contribution is often in the thinking behind the system —
+            simplifying processes, connecting the pieces, and making sure the
+            user flow actually makes sense.
+          </p>
+          <p>
+            I also have a strong eye for UX and product flow. I may not be the
+            person designing every visual from scratch, but I&apos;m usually
+            the person asking: &quot;Does this make sense to the user?&quot;
+          </p>
+          <p>
+            I care about building practical systems that solve the actual
+            problem without adding unnecessary complexity.
           </p>
         </div>
       </TerminalWindow>
@@ -105,9 +132,12 @@ export default function AboutPage() {
           </h2>
           <ul className="space-y-3">
             {values.map((v, i) => (
-              <li key={i} className="flex gap-3 text-sm text-muted">
+              <li key={i} className="flex gap-3 text-sm">
                 <span className="font-mono text-ok">✓</span>
-                {v}
+                <div>
+                  <p className="font-mono text-text">{v.title}</p>
+                  <p className="mt-0.5 text-muted">{v.text}</p>
+                </div>
               </li>
             ))}
           </ul>
