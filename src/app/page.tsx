@@ -6,10 +6,10 @@ import { projects } from "@/data/projects";
 import { site } from "@/data/site";
 
 const stats = [
-  { label: "projects shipped", value: "6" },
-  { label: "avg uptime (SLA)", value: "99.9%" },
-  { label: "best p95 latency win", value: "-62%" },
-  { label: "events handled / day", value: "40M" },
+  { label: "projects listed", value: "3" },
+  { label: "hackathon wins", value: "2" },
+  { label: "Google AI certs", value: "3" },
+  { label: "capstone client", value: "BJMP Region III" },
 ];
 
 export default function Home() {
@@ -23,12 +23,15 @@ export default function Home() {
           {site.name}
           <span className="ml-2 inline-block h-[0.9em] w-[0.5ch] translate-y-1 bg-accent cursor-blink" />
         </h1>
+        <p className="mt-3 font-mono text-sm text-faint">
+          {site.fullName} · {site.tagline}
+        </p>
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
           {site.role}
         </p>
         <p className="mt-3 max-w-xl text-muted">
-          I design the backend like I design the product — every API, schema
-          and rule traces back to a business decision you can measure.
+          I build full-stack systems that trace back to real problems —
+          business logic first, user flow always.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
@@ -46,6 +49,9 @@ export default function Home() {
         </div>
         <div className="mt-6 font-mono text-xs text-faint">
           <span className="text-ok">●</span> available for work & freelance
+          <span className="mx-2">·</span>
+          <span className="text-accent">recent:</span> eGovPH Hackathon — Top
+          30 Finalist (this month)
         </div>
       </section>
 
@@ -64,7 +70,7 @@ export default function Home() {
       <section className="py-16">
         <SectionHeader
           path="/projects"
-          description="A few projects I've designed, built and shipped. Each one started as a business problem."
+          description="Capstone, hackathon and competition builds — each one started as a real problem."
         />
         <div className="border-t border-line">
           {featured.map((p) => (
@@ -84,27 +90,28 @@ export default function Home() {
       <section className="pb-16">
         <SectionHeader
           path="/about"
-          description="Strong on business logic, backend systems, and — the thing teams notice — how the product should flow."
+          description="Student developer with a product brain — how systems should flow, and why."
         />
-        <TerminalWindow title="kenji@portfolio: ~/profile">
+        <TerminalWindow title={`${site.handle}@portfolio: ~/profile`}>
           <div className="space-y-2 font-mono text-sm">
             <p>
               <span className="text-accent">$</span> cat about.txt
             </p>
             <p className="text-muted">
-              Backend engineer with a product brain. I&apos;m at my best when
-              the requirements are business output, not tickets — I turn them
-              into systems people actually like using.
+              Student developer with a product brain. I&apos;ve built for real
+              users — capstone clients and hackathon judges — and I design
+              systems around what the business actually needs.
             </p>
             <p className="text-muted">
-              Comfortable across APIs, data, infrastructure and the UX
-              judgment that keeps a product coherent.
+              Comfortable across frontend, backend, databases and API
+              integration, plus the product judgment that keeps a system
+              coherent.
             </p>
             <p className="pt-2">
               <span className="text-accent">$</span> ls ./values
             </p>
             <p className="text-muted">
-              business-outcome-first · measurable · simple-by-construction
+              business-first · measurable · user-flow-aware
             </p>
             <p className="pt-2">
               <span className="text-accent">$</span> _
@@ -127,8 +134,9 @@ export default function Home() {
           $ echo &quot;let&apos;s build something&quot;
         </h2>
         <p className="mt-3 max-w-xl text-muted">
-          Open to full-time roles, freelance backend work, and product
-          consulting. If you have a business problem, I should hear about it.
+          Open to internships, freelance work, and junior full-stack roles. If
+          you have a problem worth building for, I&apos;d like to hear about
+          it.
         </p>
         <div className="mt-6">
           <a

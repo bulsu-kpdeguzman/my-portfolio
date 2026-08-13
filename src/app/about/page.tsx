@@ -1,53 +1,54 @@
 import type { Metadata } from "next";
 import SectionHeader from "@/components/SectionHeader";
 import TerminalWindow from "@/components/TerminalWindow";
+import { site } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "About",
 };
 
 const skills = [
-  "Go",
-  "TypeScript",
-  "Node.js",
-  "PostgreSQL",
-  "Redis",
-  "Kafka",
-  "ClickHouse",
-  "Docker",
-  "gRPC",
-  "REST",
-  "OAuth2 / OIDC",
-  "AWS",
-  "GCP",
-  "event-driven",
+  "React.js",
+  "Laravel",
+  "PHP",
+  "MySQL",
+  "JavaScript / TypeScript",
+  "Tailwind CSS",
+  "REST APIs",
+  "Git / GitHub",
 ];
 
 const values = [
   "Business outcome first — I ask 'what should this move for the business' before touching code.",
-  "Measure everything — every project ships with numbers attached.",
+  "Measure everything — I try to attach real numbers to every project.",
   "Simple by construction — prefer boring, reliable systems that are easy to reason about.",
-  "UX flow matters to me — I ship backends, but I review the product like a user.",
+  "UX flow matters to me — I build the whole stack, but I review the product like a user.",
 ];
 
 const timeline = [
   {
-    period: "2024 — now",
-    title: "Senior Backend Engineer",
-    org: "Laterra",
-    text: "Lead the platform's event pipeline and pricing engine. Introduced the rules-as-config pattern now used across 4 products.",
+    period: "— May 2027 (expected)",
+    title: "BS in Information Technology",
+    org: "Bulacan State University — Main Campus",
+    text: "Studying software development, databases, and systems analysis. Expected to graduate May 2027.",
   },
   {
-    period: "2022 — 2024",
-    title: "Backend Engineer",
-    org: "Northstack",
-    text: "Shipped identity, notification and analytics services. Cut month-end report latency by 62%.",
+    period: "2026",
+    title: "Capstone Lead — EaseCert",
+    org: "BJMP Region III",
+    text: "Led and built a full-stack document issuance and appointment management system as capstone leader and primary developer.",
   },
   {
-    period: "2020 — 2022",
-    title: "Full-Stack Developer",
-    org: "Slice Collective",
-    text: "Full-stack on client work — taught me product thinking by being closer to the user and the design.",
+    period: "2026",
+    title: "API Integration Lead — eSkolar",
+    org: "eGovPH Hackathon",
+    text: "Integrated eGovSSO, eMessage, eGovAI and Face Liveness into a unified scholarship platform. Top 30 finalist.",
+  },
+  {
+    period: "2026",
+    title: "Marketing Plan Lead — DIWA",
+    org: "IT Marketing Challenge",
+    text: "Crafted the positioning, strategy and pitch for a smart tourism concept. 4th place.",
   },
 ];
 
@@ -59,26 +60,25 @@ export default function AboutPage() {
         description="The long version — who I am, what I value, and how I got here."
       />
 
-      <TerminalWindow title="kenji@portfolio: ~/about">
+      <TerminalWindow title={`${site.handle}@portfolio: ~/about`}>
         <div className="space-y-4 text-muted leading-relaxed">
           <p>
             <span className="text-accent">$</span> I&apos;m{" "}
-            <span className="text-text">Kenji</span> — a backend engineer, but
-            honestly the label undersells it. I&apos;m strong on business
-            logic: turning a messy requirement like &quot;make signup stop
-            leaking money&quot; into a clear architecture, a few crisp APIs, and
-            the right data model.
+            <span className="text-text">Kenjie</span> — a student developer
+            who treats software like a business decision, not just a ticket.
+            My capstone for BJMP Region III digitized document issuance and
+            appointments; my hackathon build integrated eGovSSO, eMessage,
+            eGovAI and Face Liveness into one scholarship platform.
           </p>
           <p>
-            The slightly unusual part: I also judge UX and product flow well.
-            I&apos;m usually the one in the room saying &quot;wait — the user
-            will never figure that out from here.&quot; That combination means
-            I don&apos;t just build the backend to spec; I build the spec into
-            something a customer would actually tolerate.
+            The slightly unusual part: I also judge UX and product flow well —
+            I&apos;m the one asking &quot;wait, the user will never figure
+            that out from here.&quot; That&apos;s the mindset I bring to every
+            project.
           </p>
           <p>
-            Not a professional graphic designer — that&apos;s why this site
-            looks like a terminal. Judgment over decoration.
+            Not a professional designer — that&apos;s why this site looks like
+            a terminal. Judgment over decoration.
           </p>
         </div>
       </TerminalWindow>

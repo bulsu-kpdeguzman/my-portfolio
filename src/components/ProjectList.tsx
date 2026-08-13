@@ -25,7 +25,7 @@ export default function ProjectList() {
                   : "bg-surface text-muted ring-1 ring-inset ring-line hover:text-text"
               }`}
             >
-              {c.toLowerCase()}
+              {c}
             </button>
           );
         })}

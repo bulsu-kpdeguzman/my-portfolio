@@ -41,7 +41,7 @@ export default function CredentialsPage() {
             {certs.map((c, i) => (
               <div
                 key={c.id}
-                className="group flex items-start justify-between gap-4 border-b border-line py-4 transition-colors hover:bg-surface-hi last:border-b-0 sm:px-4"
+                className="group flex items-start justify-between gap-4 border-b border-line px-4 py-4 transition-colors hover:bg-surface-hi last:border-b-0"
               >
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -92,7 +92,7 @@ export default function CredentialsPage() {
             {achievements.map((a, i) => (
               <div
                 key={a.id}
-                className="group flex items-start justify-between gap-4 border-b border-line py-4 transition-colors hover:bg-surface-hi last:border-b-0 sm:px-4"
+                className="group flex items-start justify-between gap-4 border-b border-line px-4 py-4 transition-colors hover:bg-surface-hi last:border-b-0"
               >
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -109,6 +109,11 @@ export default function CredentialsPage() {
                     >
                       {a.placement}
                     </span>
+                    {a.recent ? (
+                      <span className="rounded border border-accent px-2 py-0.5 font-mono text-[11px] uppercase tracking-wide text-accent">
+                        recent
+                      </span>
+                    ) : null}
                   </div>
                   <p className="mt-1 font-mono text-sm text-muted">
                     {a.organizer}

@@ -1,6 +1,6 @@
 # Project Context — `my-portfolio` (Next.js terminal portfolio)
 
-> Handoff notes for the next session. Generated 2026-08-12.
+> Handoff notes for the next session. Generated 2026-08-12, updated 2026-08-13 (real content swap).
 
 ## Goal & Identity
 - **Owner:** Kenji — **student** (no work experience yet), strong on **business logic** + **UX/flow judgment**, hackathon-proven (2 PH competitions: IT Marketing Challenge, eGov PH Hackathon 2026), weak at executing visual design (hence prescriptive design tokens).
@@ -25,13 +25,13 @@
 ## Pages (all static)
 | Route | Notes |
 |---|---|
-| `/` | `$ whoami` hero + blinking cursor, stats row, 3 featured `ProjectRow`s, `$ cat about.txt` TerminalWindow, contact band |
-| `/work` | ⚠️ **DUMMY-DRIVEN** — content pending restructure (see CURRENT OPEN WORK). Currently renders the fabricated `projects.ts` rows + filter chips (client `ProjectList`) |
-| `/work/[slug]` | Same as above — 6 fake case studies (`generateStaticParams`, `dynamicParams=false`), terminal-window shell, `$ cat PROBLEM.md`, ASCII architecture (green), `$ tail results.log` metrics, prev/next nav |
-| `/about` | `$ whoami` narrative, skills grid, values, experience timeline |
-| `/stack` | `~/.config/…` grouped tool lists |
+| `/` | `$ whoami` hero + blinking cursor + full-name line, stats row (3·2·3·1: projects listed · hackathon wins · Google AI certs · capstone client), 3 featured `ProjectRow`s, `$ cat about.txt` TerminalWindow, contact band |
+| `/work` | 3 real projects (`ProjectList` filter chips: All · Capstone · GovTech · Concept) |
+| `/work/[slug]` | 3 real case studies (`generateStaticParams`, `dynamicParams=false`): easecert (shipped) · eskolar (shipped) · diwa (concept — amber `text-warn` status), terminal-window shell, `$ cat PROBLEM.md`, `$ tail results.log` qualitative metrics, prev/next nav |
+| `/about` | `$ whoami` narrative (student framing), skills grid (React/Laravel/PHP/MySQL/etc.), values, real timeline (education + 2026 milestones) |
+| `/stack` | `~/.config/…` grouped real tools incl. `gov integrations` group |
 | `/credentials` | **Two terminal windows**: `credentials.lock` (3 Google AI certs, `verify ↗` → Credly) + `highlights.log --honors` (2 competition wins, color-coded placement chips, `verify ↗` → Facebook) |
-| `/contact` | mailto CTA + client `ContactForm` |
+| `/contact` | mailto CTA + client `ContactForm` + "resume: coming soon" note |
 
 ## Key Components (`src/components/`)
 - <code>TerminalBackground</code> (client, all pages): fixed <code>z-0</code> ambient terminal — a **typing log** top-left (`left-3 top-16 lg:left-60`), grows **downward** from the top: one <code>setInterval</code> (<code>CHAR_MS=140</code>, slow) types a line char-by-char with a blinking <code>▌</code> caret (<code>cursor-blink</code>), pauses ~700ms (<code>PAUSE_TICKS=5</code>), then appends a random line from <code>liveLines</code> (cap 12; oldest prunes from the top, <code>max-h-[70vh]</code>). Single combined state object, all <code>setState</code> in the timer callback (no setState-in-effect/refs); deterministic seed (module-level <code>lineSeq</code>), prefers-reduced-motion freezes it. Opacity 0.06/0.08/0.14, <code>aria-hidden</code>+<code>pointer-events-none</code>. Content via <code>z-10</code> on <code>main</code>/<code>Footer</code>. (Option A chosen over B — user tried B's single prompt and preferred A.)
@@ -40,10 +40,10 @@
 - **Layout:** `layout.tsx` body `lg:pl-56` beside the fixed rail; all pages keep their self-centered `max-w-3xl` containers (zero per-page edits). Active panel color helper `placementAccent/chipClass` lives in the credentials page.
 
 ## Data Files (`src/data/`)
-- `site.ts` — `name` / `handle` / `tagline` / `role` / `location` are **REAL**; email/GitHub/LinkedIn/resume are **DUMMY** (`hello@kenji.dev`, `github.com/you`, `linkedin.com/in/you`, `#`) → replace with real values or `[your email]`-style markers.
-- `projects.ts` — **ALL 6 case studies are FABRICATED dummy data** (LedgerCore, CargoGrid, NovaAuth, Relay, PipelineDash, BizRules) incl. fake metrics + `https://example.com/...` URLs. User wants them **gone** (see CURRENT OPEN WORK). `Project` type: slug/name/category/tagline/year/stack/tags/featured/status/externalUrl/overview/problem/role/approach/architecture/results/retro.
+- `site.ts` — **ALL REAL as of 2026-08-13**: `name: "Kenjie"` · `fullName: "Kenjie De Guzman"` · `handle: "kenjie"` · `tagline: "Student · Full-Stack Developer"` · `role:` BSIT student copy · `description` · `email: Kenjie.deguzman.bsit@gmail.com` · `location: "Pampanga, PH"` · `github: bulsu-kpdeguzman` · `linkedin: /in/kenjie-deguzman-bsit/` · `resume: "#"` (⚠️ **no resume yet** — user confirmed; /contact shows "resume: coming soon"; `resume` field unused in UI).
+- `projects.ts` — **ALL 3 REAL**: EaseCert (capstone, BJMP Region III, shipped) · eSkolar (eGovPH Top 30, shipped) · DIWA (concept — **explicitly a concept/pitch, never a build**; status `concept` added to the union, rendered amber `text-warn`). No `architecture` (never fabricated), results are qualitative. eSkolar has no external link yet. `Project` type: slug/name/category/tagline/year/stack/tags/featured/status (`shipped|in progress|archived|concept`)/externalUrl/overview/problem/role/approach/architecture?/results/retro?.
 - `certs.ts` — **REAL**: 3 Google AI certs (Coursera) with Credly URLs.
-- `achievements.ts` — **REAL**: 2 competition wins. **DIWA is a PLAN ONLY** (do NOT promote to a built project — keep only as the achievement note); **eSkolar is a real eGov PH hackathon build** — candidate flagship case study once user provides role/stack/repo.
+- `achievements.ts` — **REAL**: 2 competition wins. **DIWA stays as achievement note only + concept project — never a built claim**; **eSkolar** is a real build.
 - `commands.ts` — `liveLines` pool for the background typing console. Decorative only (designed ambience, not a claim); keep.
 
 ## Credentials & Honors (most recent work)
@@ -53,42 +53,36 @@
 - **Nav → sidebar:** desktop left rail (`Sidebar`, tmux-style active border) + mobile topbar (`Navbar` is now `lg:hidden` with `flex-wrap` — the old single-row topbar overflowed below ~420px). ⌘K lifted into `PaletteProvider` (`usePalette().open()`).
 - **User follow-up:** FB `verify ↗` links must be **public** — user should double-check them logged-out / incognito before sharing the site.
 
-## CURRENT OPEN WORK — remove all dummy content (user directive)
-- **Context:** user is a **student with no work experience**; the template content assumed an experienced backend engineer. Nothing fabricated may ship.
-- **Dummy inventory to remove / replace:**
-  - `projects.ts` — all 6 fabricated case studies (drives `/work`, `/work/[slug]`, and the home "featured" rows + stats numbers like `40M events/day` / `99.98%`).
-  - `/about` timeline — fake companies (Laterra, Northstack, Slice Collective).
-  - `site.ts` — fake email/github/linkedin/resume (see Data Files).
-  - Home hero + `about.txt` copy, `/work` `/contact` `/stack` copy + skills grid/values — generic template copy; confirm what is actually true before keeping.
-- **Real anchors to build on:** 3 Google AI certs · 2 competition wins · **eSkolar** (real eGov PH build) · **DIWA** (plan only — achievement mention, never a project).
-- **Pending question checklist (ask the user — do NOT invent answers):**
-  1. eSkolar: your role, tech stack, what it does (2–3 sentences), repo/link?
-  2. Other REAL projects (school / capstone / personal / hackathon) — names + one-liners + actually built?
-  3. `/work` fate: **A** keep the page with real projects only · **B** drop `/work` from nav until real builds exist · **C** merge real builds into `/credentials` as "notable builds" for now. (Lean B if 0 builds, A if ≥1.)
-  4. Education: school, degree/program, expected graduation year?
-  5. Contact: real email / GitHub / LinkedIn / location — or visible `[your email]` markers for later?
-  6. Skills: which of the currently-listed stack (Go, TypeScript, PostgreSQL, Redis, Kafka, ClickHouse, Docker, gRPC, REST, OAuth2/OIDC, AWS, GCP, event-driven) are genuinely used?
-- **Tone:** reframe copy from "senior backend engineer" to honest student positioning (e.g. "backend developer in the making, hackathon-proven"); never claim experience.
+## CURRENT OPEN WORK — dummy content REMOVED (2026-08-13) ✅
+- **Done:** 6 fabricated projects → 3 real (EaseCert/eSkolar/DIWA-concept); fake job timeline → education + real 2026 milestones; dummy contacts → real values; fake home stats → 3·2·3·1; skills/stack rebuilt from real tools; copy re-framed to honest student positioning; `Kenji` → `Kenjie` everywhere (hero, titles via `site.handle`, about); full name `site.fullName` shown under hero.
+- **Remaining small items:**
+  - `resume: "#"` — no resume yet; swap in real link when ready (and drop the "resume: coming soon" note on /contact).
+  - eSkolar: add `externalUrl` (repo/deck) when one exists.
+  - User should double-check the 2 FB `verify ↗` links are public (logged-out/incognito).
+  - `location: "Pampanga, PH"` — set per user request (was Manila).
+  - Copy still pending user approval on wording nuances if they want tweaks.
 
 ## Build / Verification
 - `npm run dev` (port 3000) · `npm run build` · `npm run lint`
 - `npm run pixelate` — orphaned but harmless: `scripts/pixelate.mjs` (sharp nearest-neighbor, expects `public/avatar.png` → writes `public/avatar.pixel.png`), included in case the user wants the pixel avatar back.
-- Verified: 15 static pages, prod build passes (Lighthouse-style curl checks done earlier).
+- Verified: 12 static pages (home + about/contact/credentials/stack/work + 3 project slugs + not-found), prod build passes.
 
 ## History Notes (decisions already made)
 - **Pixel avatar** (hero, `PixelAvatar`) was built, then **removed at user request**. Deleted `src/components/PixelAvatar.tsx`, `public/avatar.png`, `public/avatar.pixel.png`. The `pixelate` script was kept for optional re-add.
 - **Credly embeds** (official badge iframes via `embed.js` + `CredentialsBadges`) were built, then **removed at user request** in favor of the current text-only list.
 - **`/certs` → `/credentials`** merge (honors window added). **Topbar → sidebar** (`Sidebar` on desktop, mobile-only `Navbar` with wrap fix); ⌘K centralized in `PaletteProvider`.
 - **TerminalBackground** iterated to its final form: scrolling columns were removed (too distracting) → typing console; **Option A** (top-anchored downward log) chosen over **Option B** (single prompt) after the user tried both; slow `CHAR_MS=140` + ~700ms pause between lines; reduced-motion freezes it; opacity 0.06/0.08/0.14.
-- **User directive:** **no dummy data** — replace all fabricated content with real facts (or visible `[ ]` markers). See CURRENT OPEN WORK.
+- **User directive:** **no dummy data** — replace all fabricated content with real facts (or visible `[ ]` markers). **EXECUTED 2026-08-13** (see CURRENT OPEN WORK).
+- **Name correction:** user goes by **Kenjie** (full: Kenjie De Guzman); `Kenji` → `Kenjie` across site; `site.handle` now drives all `@portfolio` terminal titles (single source of truth).
+- **DIWA decision:** added as a real project page but **status `concept`** (amber) with explicit "concept only — no fabricated metrics" result row + retro note. Never presented as a build.
 
 ## Possible Next Steps
-1. **Execute CURRENT OPEN WORK** — remove all dummy content and replace with real facts using the pending-question checklist (eSkolar, other real projects, `/work` decision, education, contact, skills). Do NOT invent data.
-2. Once real content is settled, adjust tone across copy (student positioning) and re-verify `/work` page count (currently 15 static pages; will drop if `/work` is trimmed/removed).
+1. Replace `resume: "#"` with a real resume link when available (also drop /contact "coming soon" note).
+2. Add eSkolar `externalUrl` (repo/deck) when one exists.
 3. Verify the 2 FB `verify ↗` links are public (logged-out incognito check).
 4. Add more `achievements.ts` rows as new competitions happen.
 5. Optional: blog page, deploy to Vercel (`vercel`), favicon/metadata polish.
-6. Git repo is NOT initialized (scaffold used `--no-git`) — init + first commit when user asks.
+6. Git repo IS initialized (commit `d68ce62`) — commit this content swap when user asks.
 
 ## Environment
 - Path: `C:\Users\kenji\Desktop\my-portfolio` · OS: **win32 / PowerShell 5.1** (no `&&`; chain with `;` and `if ($?)`)

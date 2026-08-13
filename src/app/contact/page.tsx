@@ -12,7 +12,7 @@ export default function ContactPage() {
     <div className="mx-auto max-w-3xl px-5 py-16">
       <SectionHeader
         path="/contact"
-        description="Open to full-time roles, freelance backend work and product consulting."
+        description="Open to internships, freelance work and junior full-stack roles."
       />
 
       <div className="rounded-md border border-line bg-surface px-6 py-8">
@@ -22,6 +22,9 @@ export default function ContactPage() {
         <p className="mt-3 text-muted">
           Tell me what you&apos;re building and what it needs to move for the
           business. I&apos;ll tell you how I&apos;d design the system behind it.
+        </p>
+        <p className="mt-3 font-mono text-xs text-faint">
+          resume: coming soon
         </p>
         <div className="mt-6">
           <a

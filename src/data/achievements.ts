@@ -6,6 +6,7 @@ export type Achievement = {
   year?: string;
   url?: string;
   note?: string;
+  recent?: boolean;
 };
 
 export const achievements: Achievement[] = [
@@ -17,6 +18,7 @@ export const achievements: Achievement[] = [
     year: "2026",
     url: "https://www.facebook.com/share/p/1CsUQw1mGm/",
     note: "eSkolar — a unified scholarship platform",
+    recent: true,
   },
   {
     id: "a2",
@@ -25,6 +27,6 @@ export const achievements: Achievement[] = [
     placement: "Best Execution — Special Award · 4th place",
     year: "2026",
     url: "https://www.facebook.com/share/p/1DHz1mtpwj/",
-    note: "DIWA — Digital Intelligent Wayfinding Assistant",
+    note: "DIWA — Digital Intelligent Wayfinding Assistant · organized by PSITE-CL",
   },
 ];

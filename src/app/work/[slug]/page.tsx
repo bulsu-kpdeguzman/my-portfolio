@@ -4,6 +4,12 @@ import { notFound } from "next/navigation";
 import TagChip from "@/components/TagChip";
 import TerminalWindow from "@/components/TerminalWindow";
 import { getProject, projects } from "@/data/projects";
+import { site } from "@/data/site";
+
+const statusColor: Record<string, string> = {
+  shipped: "text-ok",
+  concept: "text-warn",
+};
 
 export const dynamicParams = false;
 
@@ -53,7 +59,7 @@ export default async function ProjectPage({
         ← back to projects
       </Link>
 
-      <TerminalWindow title={`kenji@portfolio: ~/projects/${project.slug}`}>
+      <TerminalWindow title={`${site.handle}@portfolio: ~/projects/${project.slug}`}>
         <div className="space-y-2 border-b border-line pb-6">
           <h1 className="text-3xl font-semibold tracking-tight">
             {project.name}
@@ -64,7 +70,7 @@ export default async function ProjectPage({
             <span>·</span>
             <span>{project.year}</span>
             <span>·</span>
-            <span className={project.status === "shipped" ? "text-ok" : ""}>
+            <span className={statusColor[project.status] ?? ""}>
               {project.status}
             </span>
             {project.externalUrl ? (

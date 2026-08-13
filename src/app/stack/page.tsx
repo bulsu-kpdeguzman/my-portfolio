@@ -6,26 +6,17 @@ export const metadata: Metadata = {
 };
 
 const stack = [
-  { group: "languages", items: ["Go", "TypeScript", "Python", "SQL"] },
+  { group: "languages", items: ["JavaScript", "TypeScript", "PHP", "SQL"] },
+  { group: "frontend", items: ["React.js", "Tailwind CSS"] },
+  { group: "backend", items: ["Laravel", "REST APIs"] },
+  { group: "data", items: ["MySQL"] },
   {
-    group: "backend",
-    items: ["Node.js", "NestJS", "FastAPI", "REST", "gRPC", "GraphQL"],
+    group: "gov integrations",
+    items: ["eGovSSO", "eMessage", "eGovAI", "Face Liveness"],
   },
   {
-    group: "data",
-    items: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "ClickHouse", "Kafka"],
-  },
-  {
-    group: "infra",
-    items: ["Docker", "AWS", "GCP", "Nginx", "CI/CD"],
-  },
-  {
-    group: "auth & security",
-    items: ["OAuth2", "OIDC", "JWT", "MFA", "WebAuthn"],
-  },
-  {
-    group: "also good at",
-    items: ["product flow", "business logic", "UX review", "API design"],
+    group: "soft skills",
+    items: ["business logic", "product flow", "UX review", "project management"],
   },
 ];
 
