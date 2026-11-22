@@ -1,12 +1,21 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import SectionHeader from "@/components/SectionHeader";
 import { certs } from "@/data/certs";
 import { achievements } from "@/data/achievements";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Credentials",
-};
+export const metadata = createPageMetadata({
+  title: "Certifications & Achievements",
+  description:
+    "View Kenjie P. De Guzman's Java and Google AI certifications plus placements in GCash ImaGnation, the eGovPH Hackathon, and the IRCITE IT Marketing Challenge.",
+  path: "/credentials",
+  keywords: [
+    "IT Specialist Java",
+    "Google AI Professional Certificate",
+    "GCash ImaGnation",
+    "eGovPH Hackathon",
+  ],
+});
 
 const placementAccent = (placement: string): string => {
   const p = placement.toLowerCase();
@@ -27,6 +36,7 @@ export default function CredentialsPage() {
     <div className="mx-auto max-w-3xl px-5 py-16">
       <SectionHeader
         path="/credentials"
+        title="Certifications and achievements"
         description="Verifiable evidence of skill — credentials I've earned and competition honors, each row linking to the record."
       />
 
@@ -78,7 +88,7 @@ export default function CredentialsPage() {
           </div>
 
           <div className="border-t border-line px-4 py-2 font-mono text-xs text-faint">
-            status: {certs.length} credentials · verified via credly.com
+            status: {certs.length} credentials · verification links shown where available
           </div>
         </div>
 
@@ -142,7 +152,7 @@ export default function CredentialsPage() {
           </div>
 
           <div className="border-t border-line px-4 py-2 font-mono text-xs text-faint">
-            status: {achievements.length} honors · each row links to the public post
+            status: {achievements.length} honors · public verification links shown where available
           </div>
         </div>
       </div>

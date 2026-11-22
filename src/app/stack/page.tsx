@@ -1,18 +1,48 @@
-import type { Metadata } from "next";
 import SectionHeader from "@/components/SectionHeader";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Stack",
-};
+export const metadata = createPageMetadata({
+  title: "Technology Stack",
+  description:
+    "Kenjie P. De Guzman's technology stack includes React, Next.js, Laravel, Django, Java, Python, MySQL, Supabase, Firebase, Docker, CI/CD, AI/LLM, and RAG.",
+  path: "/stack",
+  keywords: ["React", "Next.js", "Laravel", "Django", "Docker", "RAG"],
+});
 
 const stack = [
   {
     group: "languages",
-    items: ["Java", "JavaScript", "TypeScript", "SQL", "PHP", "C#"],
+    items: [
+      "Java",
+      "JavaScript",
+      "TypeScript",
+      "Python",
+      "SQL",
+      "PHP",
+      "C#",
+      "HTML",
+      "CSS",
+      "Shell",
+    ],
   },
   { group: "frontend", items: ["React.js", "Next.js", "Tailwind CSS"] },
-  { group: "backend", items: ["Laravel", "REST APIs", "Docker"] },
-  { group: "data", items: ["MySQL", "PostgreSQL"] },
+  {
+    group: "backend",
+    items: ["Node.js", "Laravel", "Django", "REST APIs"],
+  },
+  {
+    group: "data",
+    items: ["MySQL", "PostgreSQL", "Supabase", "Prisma", "Firebase", "Neon"],
+  },
+  {
+    group: "AI",
+    items: ["AI / LLM", "Gemini", "RAG", "Isolation Forest"],
+  },
+  {
+    group: "DevOps & infrastructure",
+    items: ["Docker", "VPS", "CI/CD", "GitHub Actions", "Vercel", "Git"],
+  },
+  { group: "tools", items: ["Figma", "Postman"] },
   {
     group: "gov integrations",
     items: ["eGovSSO", "eMessage", "eGovAI", "Face Liveness"],
@@ -28,6 +58,7 @@ export default function StackPage() {
     <div className="mx-auto max-w-3xl px-5 py-16">
       <SectionHeader
         path="/stack"
+        title="Technology stack"
         description="The tools I reach for, and the non-code skills that round them out."
       />
 

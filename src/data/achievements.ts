@@ -11,6 +11,15 @@ export type Achievement = {
 
 export const achievements: Achievement[] = [
   {
+    id: "a0",
+    name: "GCash ImaGnation",
+    organizer: "GCash",
+    placement: "4th Runner-Up of 366 teams nationwide",
+    year: "2026",
+    note: "Led development of the functional system prototype",
+    recent: true,
+  },
+  {
     id: "a1",
     name: "eGov PH Hackathon",
     organizer: "DICT",
@@ -18,15 +27,14 @@ export const achievements: Achievement[] = [
     year: "2026",
     url: "https://www.facebook.com/share/p/1CsUQw1mGm/",
     note: "eSkolar — a unified scholarship platform",
-    recent: true,
   },
   {
     id: "a2",
     name: "IT Marketing Challenge",
     organizer: "IRCITE",
-    placement: "Best Execution — Special Award · 4th place",
+    placement: "Top 4 of 20 regional teams · Best Execution-Ready Solution",
     year: "2026",
     url: "https://www.facebook.com/share/p/1DHz1mtpwj/",
-    note: "DIWA — Digital Intelligent Wayfinding Assistant · organized by PSITE-CL",
+    note: "Coordinated development and project direction for an AI-assisted itinerary planner",
   },
 ];

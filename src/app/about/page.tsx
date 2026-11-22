@@ -1,11 +1,15 @@
-import type { Metadata } from "next";
 import SectionHeader from "@/components/SectionHeader";
 import TerminalWindow from "@/components/TerminalWindow";
 import { site } from "@/data/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "About",
-};
+  description:
+    "Learn about Kenjie P. De Guzman, a Dean's List BSIT student at Bulacan State University and full-stack developer focused on backend systems, AI, and product workflows.",
+  path: "/about",
+  keywords: ["BSIT student", "Dean's List", "Bulacan State University"],
+});
 
 const skills = [
   "Laravel",
@@ -16,6 +20,7 @@ const skills = [
   "React.js",
   "Next.js",
   "JavaScript / TypeScript",
+  "Python",
   "Java",
   "C#",
   "Tailwind CSS",
@@ -45,9 +50,15 @@ const values = [
 const timeline = [
   {
     period: "— May 2027 (expected)",
-    title: "BS in Information Technology",
+    title: "BS in Information Technology — Web & Mobile Development",
     org: "Bulacan State University — Main Campus",
-    text: "Studying software development, databases, and systems analysis. Expected to graduate May 2027.",
+    text: "Dean's List from 2023–2025 and nominee for Best Capstone. Studying software development, databases, systems analysis, and web and mobile application development.",
+  },
+  {
+    period: "2023 — present",
+    title: "Creative Writers Team Lead",
+    org: "BulSU CICT Local Student Council",
+    text: "Leads creative-writing work for the college's local student council alongside technical studies and project development.",
   },
   {
     period: "2026",
@@ -74,6 +85,7 @@ export default function AboutPage() {
     <div className="mx-auto max-w-3xl px-5 py-16">
       <SectionHeader
         path="/about"
+        title="About Kenjie P. De Guzman"
         description="The long version — who I am, what I value, and how I got here."
       />
 
@@ -83,7 +95,7 @@ export default function AboutPage() {
             <span className="text-accent">$</span> cat about.txt
           </p>
           <p>
-            I&apos;m <span className="text-text">Kenjie</span> — a BSIT
+            I&apos;m <span className="text-text">{site.fullName}</span> — a BSIT
             student and full-stack developer who treats software as a system,
             not just a collection of features.
           </p>

@@ -4,11 +4,22 @@ import SectionHeader from "@/components/SectionHeader";
 import TerminalWindow from "@/components/TerminalWindow";
 import { projects } from "@/data/projects";
 import { site } from "@/data/site";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  description: site.description,
+  path: "/",
+  keywords: [
+    "full-stack developer portfolio",
+    "web and mobile application developer",
+    "Pampanga software developer",
+  ],
+});
 
 const stats = [
-  { label: "projects listed", value: "3", href: "/work" },
-  { label: "hackathon wins", value: "2", href: "/credentials" },
-  { label: "Google AI certs", value: "3", href: "/credentials" },
+  { label: "projects listed", value: "6", href: "/work" },
+  { label: "competition placements", value: "3", href: "/credentials" },
+  { label: "professional certificates", value: "2", href: "/credentials" },
   {
     label: "capstone — BJMP Region III",
     value: "1",
@@ -78,6 +89,8 @@ export default function Home() {
       <section className="py-16">
         <SectionHeader
           path="/projects"
+          title="Featured software projects"
+          level="h2"
           description="Capstone, hackathon and competition builds — each one started as a real problem."
         />
         <div className="border-t border-line">
@@ -98,6 +111,8 @@ export default function Home() {
       <section className="pb-16">
         <SectionHeader
           path="/about"
+          title="About Kenjie P. De Guzman"
+          level="h2"
           description="Student developer with a systems mindset — how things should work, how users move through them, and why."
         />
         <TerminalWindow title={`${site.handle}@portfolio: ~/profile`}>

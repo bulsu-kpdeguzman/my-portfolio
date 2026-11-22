@@ -21,16 +21,4 @@ export const ongoing: OngoingItem[] = [
     ],
     status: "in progress",
   },
-  {
-    id: "cyh-clark",
-    type: "event",
-    title: "Can You Hack It — Clark",
-    tagline:
-      "Hackathon participation organized by ITBPAP — the IT Business Process Association of the Philippines.",
-    points: [
-      "Currently competing as a participant.",
-      "Details of the build will land here once the hackathon wraps.",
-    ],
-    status: "participating",
-  },
 ];

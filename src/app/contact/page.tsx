@@ -1,30 +1,35 @@
-import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
 import SectionHeader from "@/components/SectionHeader";
 import { site } from "@/data/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Contact",
-};
+  description:
+    "Contact Kenjie P. De Guzman for internships, freelance full-stack development, AI applications, backend systems, and junior software development opportunities.",
+  path: "/contact",
+  keywords: ["hire full-stack developer", "Pampanga software developer"],
+});
 
 export default function ContactPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-16">
       <SectionHeader
         path="/contact"
+        title="Contact Kenjie P. De Guzman"
         description="Open to internships, freelance work and junior full-stack roles."
       />
 
       <div className="rounded-md border border-line bg-surface px-6 py-8">
-        <h1 className="font-mono text-2xl text-text">
+        <h2 className="font-mono text-2xl text-text">
           $ echo &quot;let&apos;s talk&quot;
-        </h1>
+        </h2>
         <p className="mt-3 text-muted">
           Tell me what you&apos;re building and what it needs to move for the
           business. I&apos;ll tell you how I&apos;d design the system behind it.
         </p>
         <p className="mt-3 font-mono text-xs text-faint">
-          resume: coming soon
+          resume: available on request
         </p>
         <div className="mt-6">
           <a

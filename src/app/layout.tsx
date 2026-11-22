@@ -21,11 +21,29 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
-    default: site.name + " — " + site.tagline,
-    template: `%s — ${site.name}`,
+    default: `${site.fullName} | Full-Stack Developer`,
+    template: `%s | ${site.fullName}`,
   },
   description: site.description,
+  applicationName: `${site.fullName} Portfolio`,
+  authors: [{ name: site.fullName, url: site.url }],
+  creator: site.fullName,
+  publisher: site.fullName,
+  category: "technology",
+  keywords: site.keywords,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   verification: {
     google: "eI4iIPZUCTDQOasHF6ytMXC1_tuQmlM6AjHDhrJCfBg",
   },
@@ -36,6 +54,69 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${site.url}/#person`,
+        name: site.fullName,
+        alternateName: [site.name, "Kenjie De Guzman"],
+        url: site.url,
+        email: `mailto:${site.email}`,
+        jobTitle: "Full-Stack Developer",
+        description: site.description,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Candaba",
+          addressRegion: "Pampanga",
+          addressCountry: "PH",
+        },
+        affiliation: {
+          "@type": "CollegeOrUniversity",
+          name: site.university,
+        },
+        sameAs: [site.github, site.linkedin],
+        knowsAbout: [
+          "Full-stack web development",
+          "Backend architecture",
+          "REST APIs",
+          "React.js",
+          "Next.js",
+          "Laravel",
+          "MySQL",
+          "Artificial intelligence applications",
+          "Retrieval-Augmented Generation",
+          "Docker",
+          "CI/CD",
+        ],
+        hasCredential: [
+          {
+            "@type": "EducationalOccupationalCredential",
+            name: "IT Specialist — Java",
+            credentialCategory: "Certification",
+            recognizedBy: { "@type": "Organization", name: "Certiport" },
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            name: "Google AI Professional Certificate",
+            credentialCategory: "Professional Certificate",
+            recognizedBy: { "@type": "Organization", name: "Google" },
+          },
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${site.url}/#website`,
+        url: site.url,
+        name: `${site.fullName} Portfolio`,
+        description: site.description,
+        inLanguage: "en-PH",
+        author: { "@id": `${site.url}/#person` },
+      },
+    ],
+  };
+
   return (
     <html
       lang="en"
@@ -43,6 +124,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var m=localStorage.getItem('theme');var r=m==='light'?'light':m==='dark'?'dark':(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=r;}catch(e){document.documentElement.dataset.theme='dark';}})();`,

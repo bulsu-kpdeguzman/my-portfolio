@@ -5,6 +5,7 @@ import TagChip from "@/components/TagChip";
 import TerminalWindow from "@/components/TerminalWindow";
 import { getProject, projects } from "@/data/projects";
 import { site } from "@/data/site";
+import { createPageMetadata } from "@/lib/seo";
 
 const statusColor: Record<string, string> = {
   shipped: "text-ok",
@@ -25,7 +26,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return { title: "Project" };
-  return { title: project.name };
+  return createPageMetadata({
+    title: project.name,
+    description: `${project.tagline} Read Kenjie P. De Guzman's role, approach, technology stack, and project results.`,
+    path: `/work/${project.slug}`,
+    keywords: [...project.tags, ...project.stack, project.category],
+  });
 }
 
 function Prompt({ cmd }: { cmd: string }) {
@@ -50,8 +56,28 @@ export default async function ProjectPage({
   const prev = projects[idx - 1];
   const next = projects[idx + 1];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: project.name,
+    description: project.overview,
+    url: `${site.url}/work/${project.slug}`,
+    applicationCategory: project.category,
+    operatingSystem: "Web",
+    dateCreated: `${project.year}-01-01`,
+    author: { "@id": `${site.url}/#person` },
+    keywords: [...project.tags, ...project.stack].join(", "),
+    ...(project.externalUrl ? { sameAs: project.externalUrl } : {}),
+  };
+
   return (
     <div className="mx-auto max-w-2xl px-5 py-14">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <Link
         href="/work"
         className="mb-8 inline-block font-mono text-sm text-muted hover:text-accent"
