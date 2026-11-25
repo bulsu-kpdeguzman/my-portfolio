@@ -6,6 +6,8 @@ type PageMetadataOptions = {
   description: string;
   path: string;
   keywords?: string[];
+  ogImage?: string;
+  ogAlt?: string;
 };
 
 export function createPageMetadata({
@@ -13,6 +15,8 @@ export function createPageMetadata({
   description,
   path,
   keywords = [],
+  ogImage = "/opengraph-image",
+  ogAlt = `${site.fullName} — Full-Stack Developer`,
 }: PageMetadataOptions): Metadata {
   const socialTitle = title
     ? `${title} | ${site.fullName}`
@@ -34,10 +38,10 @@ export function createPageMetadata({
       description,
       images: [
         {
-          url: "/opengraph-image",
+          url: ogImage,
           width: 1200,
           height: 630,
-          alt: `${site.fullName} — Full-Stack Developer`,
+          alt: ogAlt,
         },
       ],
     },
@@ -45,7 +49,7 @@ export function createPageMetadata({
       card: "summary_large_image",
       title: socialTitle,
       description,
-      images: ["/opengraph-image"],
+      images: [ogImage],
     },
   };
 }

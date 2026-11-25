@@ -8,6 +8,7 @@ import SoundProvider from "@/components/SoundProvider";
 import SnakeProvider from "@/components/SnakeProvider";
 import TerminalBackground from "@/components/TerminalBackground";
 import "./globals.css";
+import { certs } from "@/data/certs";
 import { site } from "@/data/site";
 
 const geistSans = Geist({
@@ -63,6 +64,7 @@ export default function RootLayout({
         name: site.fullName,
         alternateName: [site.name, "Kenjie De Guzman"],
         url: site.url,
+        image: `${site.url}/opengraph-image`,
         email: `mailto:${site.email}`,
         jobTitle: "Full-Stack Developer",
         description: site.description,
@@ -90,20 +92,22 @@ export default function RootLayout({
           "Docker",
           "CI/CD",
         ],
-        hasCredential: [
-          {
-            "@type": "EducationalOccupationalCredential",
-            name: "IT Specialist — Java",
-            credentialCategory: "Certification",
-            recognizedBy: { "@type": "Organization", name: "Certiport" },
-          },
-          {
-            "@type": "EducationalOccupationalCredential",
-            name: "Google AI Professional Certificate",
-            credentialCategory: "Professional Certificate",
-            recognizedBy: { "@type": "Organization", name: "Google" },
-          },
-        ],
+        hasCredential: certs.map((cert) => ({
+          "@type": "EducationalOccupationalCredential",
+          name: cert.name,
+          credentialCategory: cert.name.includes("Certificate")
+            ? "Professional Certificate"
+            : "Certification",
+          ...(cert.issuer
+            ? {
+                recognizedBy: {
+                  "@type": "Organization",
+                  name: cert.issuer,
+                },
+              }
+            : {}),
+          ...(cert.url ? { url: cert.url } : {}),
+        })),
       },
       {
         "@type": "WebSite",
@@ -113,6 +117,7 @@ export default function RootLayout({
         description: site.description,
         inLanguage: "en-PH",
         author: { "@id": `${site.url}/#person` },
+        publisher: { "@id": `${site.url}/#person` },
       },
     ],
   };

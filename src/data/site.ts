@@ -5,7 +5,7 @@ export const site = {
   tagline: "BSIT Student · Full-Stack Developer",
   role: "Full-stack developer and systems architect — business logic first.",
   description:
-    "Kenjie P. De Guzman is a full-stack developer and BSIT student specializing in web and mobile application development, backend systems, AI applications, and DevOps.",
+    "Kenjie P. De Guzman is a full-stack developer and BSIT student building backend systems, web and mobile apps, AI workflows, and DevOps pipelines.",
   url: "https://kenjie.is-a.dev",
   email: "kenjie.deguzman.bsit@gmail.com",
   location: "Candaba, Pampanga, Philippines",
@@ -15,7 +15,7 @@ export const site = {
   degree:
     "Bachelor of Science in Information Technology, Web and Mobile Application Development",
   graduation: "May 2027",
-  updatedAt: "2026-11-18",
+  updatedAt: "2026-11-26",
   keywords: [
     "Kenjie P. De Guzman",
     "Kenjie De Guzman",

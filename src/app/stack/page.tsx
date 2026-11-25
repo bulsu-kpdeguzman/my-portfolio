@@ -68,9 +68,9 @@ export default function StackPage() {
             key={group.group}
             className="rounded-md border border-line bg-surface px-5 py-4"
           >
-            <p className="mb-3 font-mono text-xs text-faint">
+            <h2 className="mb-3 font-mono text-xs font-normal text-faint">
               ~/.config/{group.group}
-            </p>
+            </h2>
             <div className="flex flex-wrap gap-2">
               {group.items.map((item) => (
                 <span

@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: "About",
   description:
-    "Learn about Kenjie P. De Guzman, a Dean's List BSIT student at Bulacan State University and full-stack developer focused on backend systems, AI, and product workflows.",
+    "About Kenjie P. De Guzman, a Dean's List BSIT student at Bulacan State University and full-stack developer focused on backend systems and AI.",
   path: "/about",
   keywords: ["BSIT student", "Dean's List", "Bulacan State University"],
 });

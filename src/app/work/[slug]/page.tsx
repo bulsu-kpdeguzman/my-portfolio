@@ -26,11 +26,17 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return { title: "Project" };
+  const suffix =
+    project.status === "concept"
+      ? "Strategy and pitch case study by Kenjie P. De Guzman."
+      : "Role, stack, and architecture by Kenjie P. De Guzman.";
   return createPageMetadata({
     title: project.name,
-    description: `${project.tagline} Read Kenjie P. De Guzman's role, approach, technology stack, and project results.`,
+    description: `${project.tagline} ${suffix}`,
     path: `/work/${project.slug}`,
     keywords: [...project.tags, ...project.stack, project.category],
+    ogImage: `/work/${project.slug}/opengraph-image`,
+    ogAlt: `${project.name} — ${project.category} case study by ${site.fullName}`,
   });
 }
 
@@ -56,18 +62,52 @@ export default async function ProjectPage({
   const prev = projects[idx - 1];
   const next = projects[idx + 1];
 
+  const projectUrl = `${site.url}/work/${project.slug}`;
+  const isConcept = project.status === "concept";
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: project.name,
-    description: project.overview,
-    url: `${site.url}/work/${project.slug}`,
-    applicationCategory: project.category,
-    operatingSystem: "Web",
-    dateCreated: `${project.year}-01-01`,
-    author: { "@id": `${site.url}/#person` },
-    keywords: [...project.tags, ...project.stack].join(", "),
-    ...(project.externalUrl ? { sameAs: project.externalUrl } : {}),
+    "@graph": [
+      {
+        "@type": isConcept ? "CreativeWork" : "SoftwareApplication",
+        name: project.name,
+        description: project.overview,
+        url: projectUrl,
+        ...(isConcept
+          ? { genre: project.category }
+          : {
+              applicationCategory: project.category,
+              operatingSystem: "Web",
+            }),
+        dateCreated: `${project.year}-01-01`,
+        author: { "@id": `${site.url}/#person` },
+        keywords: [...project.tags, ...project.stack].join(", "),
+        ...(project.externalUrl ? { sameAs: project.externalUrl } : {}),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: site.url,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Projects",
+            item: `${site.url}/work`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: project.name,
+            item: projectUrl,
+          },
+        ],
+      },
+    ],
   };
 
   return (

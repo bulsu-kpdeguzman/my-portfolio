@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: "Contact",
   description:
-    "Contact Kenjie P. De Guzman for internships, freelance full-stack development, AI applications, backend systems, and junior software development opportunities.",
+    "Contact Kenjie P. De Guzman for internships, freelance full-stack development, AI applications, backend systems, and junior software roles.",
   path: "/contact",
   keywords: ["hire full-stack developer", "Pampanga software developer"],
 });

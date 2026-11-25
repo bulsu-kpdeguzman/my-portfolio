@@ -30,8 +30,24 @@ const stats = [
 export default function Home() {
   const featured = projects.filter((p) => p.featured);
 
+  const profileJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${site.url}/#profilepage`,
+    url: site.url,
+    name: `${site.fullName} | Full-Stack Developer`,
+    dateModified: site.updatedAt,
+    mainEntity: { "@id": `${site.url}/#person` },
+  };
+
   return (
     <div className="mx-auto max-w-3xl px-5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(profileJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <section className="pb-16 pt-20 sm:pt-28">
         <p className="mb-4 font-mono text-sm text-accent">$ whoami</p>
         <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">

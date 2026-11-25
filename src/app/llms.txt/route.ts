@@ -1,3 +1,6 @@
+import { achievements } from "@/data/achievements";
+import { certs } from "@/data/certs";
+import { ongoing } from "@/data/ongoing";
 import { projects } from "@/data/projects";
 import { site } from "@/data/site";
 
@@ -11,6 +14,24 @@ export function GET() {
     )
     .join("\n");
 
+  const certList = certs
+    .map(
+      (cert) =>
+        `- ${cert.name}${cert.issuer ? ` (${cert.issuer})` : ""}${cert.url ? `: ${cert.url}` : ""}`,
+    )
+    .join("\n");
+
+  const honorList = achievements
+    .map(
+      (item) =>
+        `- ${item.name} — ${item.placement} (${item.organizer}${item.year ? `, ${item.year}` : ""})`,
+    )
+    .join("\n");
+
+  const ongoingList = ongoing
+    .map((item) => `- ${item.title} (${item.status}): ${item.tagline}`)
+    .join("\n");
+
   const content = `# ${site.fullName}
 
 > ${site.description}
@@ -21,6 +42,7 @@ ${site.fullName} is a BSIT student at ${site.university}, graduating ${site.grad
 
 - [About](${site.url}/about): Education, leadership, experience, and working principles.
 - [Projects](${site.url}/work): Detailed project case studies, roles, architecture, and results.
+- [Current work](${site.url}/ongoing): Ongoing software and AI builds.
 - [Credentials](${site.url}/credentials): Certifications and competition achievements.
 - [Technology stack](${site.url}/stack): Languages, frameworks, data tools, AI, and infrastructure experience.
 - [Contact](${site.url}/contact): Professional contact information and availability.
@@ -28,6 +50,18 @@ ${site.fullName} is a BSIT student at ${site.university}, graduating ${site.grad
 ## Projects
 
 ${projectList}
+
+## Current work
+
+${ongoingList}
+
+## Certifications
+
+${certList}
+
+## Competition honors
+
+${honorList}
 
 ## Identity
 

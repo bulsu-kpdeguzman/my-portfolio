@@ -18,10 +18,10 @@ export default function OpenGraphImage() {
           background: "#0a0a0b",
           color: "#f4f4f5",
           padding: "72px 80px",
-          fontFamily: "monospace",
+          fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", color: "#22c55e", fontSize: 28 }}>
+        <div style={{ display: "flex", color: "#4f8cff", fontSize: 28 }}>
           $ whoami
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
